@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="910.0" prefWidth="960.0" stylesheets="@../styles/style.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="passports_master.Main_Controller">
+    <tabs>
+        <Tab text="Импортировать">
+            <content>
+                <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="888.0" prefWidth="960.0" styleClass="anchor-pane" stylesheets="@../styles/style.css">
+                    <children>
+                        <Label layoutX="271.0" layoutY="149.0" text="- Класс изделия (Фундамент, Опора и тп)" AnchorPane.leftAnchor="271.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="271.0" layoutY="234.0" text="- Тип изделия (Например, если выбран класс Опора," AnchorPane.leftAnchor="271.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="456.0" layoutY="270.0" text="то тут надо указывать МШП-10-100)">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="import_number" focusTraversable="false" layoutX="22.0" layoutY="319.0" onKeyReleased="#number_auto_disable" prefHeight="45.0" prefWidth="245.0" promptText="Указывать без №" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="310.0">
+                            <font>
+                                <Font name="Source Code Pro" size="20.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="270.0" layoutY="320.0" text="- Номер № паспорта, если неважно - оставить пустым" AnchorPane.leftAnchor="270.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="21.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="import_amount" layoutX="32.0" layoutY="422.0" prefHeight="45.0" prefWidth="245.0" promptText="Кол-во" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="395.0">
+                            <font>
+                                <Font name="Source Code Pro" size="20.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="271.0" layoutY="405.0" text="- Количество требуемых паспортов" AnchorPane.leftAnchor="271.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="import_old_date" editable="false" layoutX="45.0" layoutY="526.0" prefHeight="45.0" prefWidth="245.0" promptText="От какой даты" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="480.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor></DatePicker>
+                        <ImageView fitHeight="126.0" fitWidth="786.0" layoutX="43.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="20.0">
+                            <image>
+                                <Image url="@../styles/passports_master.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="271.0" layoutY="489.0" text="- Дата выпуска самого старого из требуемых паспортов" AnchorPane.leftAnchor="271.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="import_young_date" editable="false" layoutX="15.0" layoutY="604.0" prefHeight="45.0" prefWidth="245.0" promptText="До какой даты" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="565.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor></DatePicker>
+                        <Label layoutX="276.0" layoutY="574.0" text="- Дата выпуска самого нового из требуемых паспортов">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                          <TextField fx:id="import_save_path" alignment="CENTER_RIGHT" focusTraversable="false" layoutY="723.0" prefHeight="47.0" prefWidth="641.0" promptText=".../.../Папка" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="735.0">
+                              <font>
+                                  <Font name="Source Code Pro" size="20.0" />
+                              </font>
+                          </TextField>
+                          <Label layoutX="666.0" layoutY="745.0" text="- Конечная директория">
+                              <font>
+                                  <Font name="Source Code Pro Black" size="20.0" />
+                              </font>
+                          </Label>
+                          <Button fx:id="btn_Import" layoutX="15.0" layoutY="810.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" text="Импорт" textFill="#e8e8e8" AnchorPane.topAnchor="820.0">
+                              <font>
+                                  <Font name="Source Code Pro Black" size="20.0" />
+                              </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                          </Button>
+                  <ComboBox fx:id="import_class" layoutX="15.0" layoutY="154.0" prefHeight="45.0" prefWidth="245.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="140.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor></ComboBox>
+                  <ChoiceBox fx:id="import_origin" layoutX="15.0" layoutY="653.0" prefHeight="45.0" prefWidth="245.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="650.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor></ChoiceBox>
+                  <Label layoutX="276.0" layoutY="659.0" text="- Оригинал/копия">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="import_info" alignment="CENTER" contentDisplay="CENTER" layoutX="271.0" layoutY="811.0" prefHeight="63.0" prefWidth="680.0" textFill="#080e86" textOverrun="CLIP">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="import_type" focusTraversable="false" layoutX="15.0" layoutY="224.0" prefHeight="45.0" prefWidth="245.0" promptText="Без пробелов" AnchorPane.topAnchor="225.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                    </children></AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Экспортировать">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane" stylesheets="@../styles/style.css">
+                    <children>
+                        <ImageView fitHeight="126.0" fitWidth="786.0" layoutX="58.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="20.0">
+                            <image>
+                                <Image url="@../styles/passports_master.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="260.0" layoutY="274.0" text="- Класс изделия (Фундамент, Опора и тп)" AnchorPane.leftAnchor="270.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="270.0" layoutY="360.0" text="- Тип изделия (Например, если выбран класс Опора," AnchorPane.leftAnchor="270.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="462.0" layoutY="397.0" text="то тут надо указывать МШП-10-100)">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="export_number" focusTraversable="false" layoutX="15.0" layoutY="432.0" prefHeight="45.0" prefWidth="245.0" promptText="Указывать без №" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="440.0">
+                            <font>
+                                <Font name="Source Code Pro" size="20.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="270.0" layoutY="450.0" text="- Номер № паспорта " AnchorPane.leftAnchor="270.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="21.0" />
+                            </font>
+                        </Label>
+                        <DatePicker fx:id="export_date" editable="false" layoutX="15.0" layoutY="526.0" prefHeight="45.0" prefWidth="245.0" promptText="Дата" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="530.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></DatePicker>
+                        <Label layoutX="270.0" layoutY="539.0" text="- Дата выпуска паспорта" AnchorPane.leftAnchor="270.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="btn_Export" layoutX="15.0" layoutY="790.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" stylesheets="@../styles/style.css" text="Экспорт" textFill="#e8e8e8" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="800.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                        </Button>
+                        <TextField fx:id="export_address" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="15.0" layoutY="165.0" prefHeight="47.0" prefWidth="746.0" promptText=".../.../файл.jpg" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0">
+                            <font>
+                                <Font name="Source Code Pro" size="20.0" />
+                            </font>
+                        </TextField>
+                        <Label layoutX="770.0" layoutY="180.0" text="- Адрес файла" AnchorPane.leftAnchor="770.0">
+                            <font>
+                                <Font name="Source Code Pro Black" size="20.0" />
+                            </font>
+                        </Label>
+                  <ComboBox fx:id="export_class" layoutX="8.0" layoutY="280.0" prefHeight="45.0" prefWidth="245.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="260.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor></ComboBox>
+                  <TextField fx:id="export_type" focusTraversable="false" layoutX="15.0" layoutY="389.0" prefHeight="45.0" prefWidth="245.0" promptText="Без пробелов" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="350.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <ChoiceBox fx:id="export_origin" layoutX="25.0" layoutY="671.0" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #ebebeb;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="620.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor></ChoiceBox>
+                  <Label layoutX="282.0" layoutY="629.0" text="- Оригинал/копия" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="export_amount" focusTraversable="false" layoutX="15.0" layoutY="701.0" prefHeight="45.0" prefWidth="245.0" promptText="Просто число" AnchorPane.topAnchor="710.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="270.0" layoutY="720.0" text="- Количество изделий" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="export_info" alignment="CENTER" layoutX="260.0" layoutY="806.0" prefHeight="34.0" prefWidth="690.0" styleClass="label-label" textFill="#2c2dc7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                    </children>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor></AnchorPane>
+            </content>
+        </Tab>
+      <Tab text="Настройки">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane" stylesheets="@../styles/style.css">
+               <children>
+                  <ImageView fitHeight="126.0" fitWidth="786.0" layoutX="58.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="20.0">
+                     <image>
+                        <Image url="@../styles/passports_master.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="export_info1" alignment="CENTER" layoutX="260.0" layoutY="806.0" prefHeight="34.0" prefWidth="690.0" styleClass="label-label" textFill="#2c2dc7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="276.0" layoutY="180.0" text="- Хост" AnchorPane.leftAnchor="400.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="settings_host" focusTraversable="false" layoutX="15.0" layoutY="170.0" onKeyReleased="#settings_change" prefHeight="45.0" prefWidth="370.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="276.0" layoutY="280.0" text="- Порт" AnchorPane.leftAnchor="400.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="settings_port" focusTraversable="false" layoutX="15.0" layoutY="297.0" onKeyReleased="#settings_change" prefHeight="45.0" prefWidth="370.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="276.0" layoutY="380.0" text="- Имя базы данных" AnchorPane.leftAnchor="400.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="settings_db_name" focusTraversable="false" layoutX="15.0" layoutY="440.0" onKeyReleased="#settings_change" prefHeight="45.0" prefWidth="370.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="370.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="276.0" layoutY="480.0" text="- Логин" AnchorPane.leftAnchor="400.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="settings_login" focusTraversable="false" layoutX="15.0" layoutY="527.0" onKeyReleased="#settings_change" prefHeight="45.0" prefWidth="370.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="470.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="276.0" layoutY="580.0" text="- Пароль" AnchorPane.leftAnchor="400.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btn_save_settings" layoutX="78.0" layoutY="667.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" stylesheets="@../styles/style.css" text="Сохранить" textFill="#e8e8e8" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="667.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <PasswordField fx:id="settings_password" layoutX="159.0" layoutY="578.0" onKeyReleased="#settings_change" prefHeight="45.0" prefWidth="370.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="570.0" />
+                  <Label fx:id="settings_info" alignment="CENTER" layoutX="157.0" layoutY="772.0" prefHeight="34.0" prefWidth="690.0" styleClass="label-label" textFill="#2c2dc7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+    </tabs>
+</TabPane>

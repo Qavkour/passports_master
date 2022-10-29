@@ -1,0 +1,43 @@
+.button{
+    -fx-background-color:  #c74528;
+}
+
+.button:hover{
+    -fx-background-color: #a3371f;
+}
+
+.button:pressed{
+    -fx-background-color: #822b17;
+}
+
+.text-field{
+    -fx-background-color:  #ebebeb;
+    -fx-border-color:  #2c965c;
+    -fx-border-width: 3;
+}
+
+.combo-box{
+    -fx-background-color:  #ebebeb;
+    -fx-border-color:  #2c965c;
+    -fx-border-width: 3;
+}
+
+.choice-box{
+    -fx-background-color:  #ebebeb;
+    -fx-border-color:  #2c965c;
+    -fx-border-width: 3;
+}
+
+.anchor-pane{
+    -fx-background-color:  #bfbfbf;
+}
+
+.label-label{
+    -fx-background-color: #bfbfbf;
+}
+
+.password-field{
+    -fx-background-color:  #ebebeb;
+        -fx-border-color:  #2c965c;
+        -fx-border-width: 3;
+}
