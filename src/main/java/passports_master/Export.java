@@ -27,14 +27,14 @@ public class Export extends DB {
 
             _address = c_address;
             _class = c_class.toLowerCase().replaceAll(" ", ""); //Приводим класс к нижнему регистру и убираем пробелы
-            _type = c_type.toUpperCase().replaceAll("-", "_");   //Приводим тип к верхнему регистру
+            _type = c_type.toUpperCase().replaceAll("-", "_");  //Приводим тип к верхнему регистру
             _number = c_number;
             _date = c_date;
             _origin = c_origin.equals("Оригинал") ? 1 : 0;
             _amount = Integer.parseInt(c_amount);
 
             try {
-                _code = encodeImage(_address); // Присваем переменной _code код файла
+                _code = encodeImage(_address); // Присваиваем переменной _code код файла
             } catch (IOException e) {
                 _info = "Не удалось закодировать файл";
             }
@@ -42,15 +42,14 @@ public class Export extends DB {
         }
         else
             _info = "Не все поля заполнены корректно"; // Если класс ExportCheckErr() фиксирует ошибку и возвращает false
-    }                                                 //                                выводим содеражание проблему
+    }                                                 //                                выводим содеражание проблемы
 
     private void Export_Method(String _class, String _type, String _number, String _date,
                                int _origin, int _amount, String _code){
 
         String sql = "INSERT INTO `" + _class + "` (`type` , `number`, `date`, `original`, `amount`, `code`) VALUES(?, ?, ?, ?, ?, ?)";
 
-        try(Connection conn = getConn()){
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try(Connection conn = getConn();  PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, _type);
             ps.setString(2, _number);
             ps.setString(3, _date);
@@ -78,13 +77,15 @@ public class Export extends DB {
     private boolean ExportCheckErr(String _address, String _class, String _type, String _number, String _date, String _origin, String _amount){
         boolean NoErr = true;
 
-        if(_address == ""){NoErr = false;}
+        if(_address.equals("")){NoErr = false;}
         if(_class == null){NoErr = false;}
-        if(_type == ""){NoErr = false;}
-        if(_number == ""){NoErr = false;}
+        if(_type.equals("")){NoErr = false;}
+        if(_number.equals("")){NoErr = false;}
         if(_date == null){NoErr = false;}
         if(_origin == null){NoErr = false;}
-        if(_amount == "" || Integer.parseInt(_amount) < 1){NoErr = false;}
+        try {
+            if (_number.equals("") & (_amount.equals("") || Integer.parseInt(_amount) < 1)) {NoErr = false;}
+        } catch (Exception e){NoErr = false;}
 
         return NoErr; /////////// Если нет пустых полей - возвращаем true ///////////
     }

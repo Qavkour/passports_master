@@ -109,6 +109,7 @@ public class Main_Controller {
         import_class.getItems().addAll(classes); // Добавляем списки
         export_class.getItems().addAll(classes);
         import_origin.getItems().addAll(Import_origin);
+        import_origin.setValue(Import_origin[2]);
         export_origin.getItems().addAll(Export_origin);
 
         btn_Export.setOnAction(event -> cl_export());
@@ -199,14 +200,13 @@ public class Main_Controller {
     @FXML
     public void settings_change(){
         String[] mass_conn_settings = ConnectionSettings();
-        if(settings_host.getText().equals(mass_conn_settings[0]) &&
+        btn_save_settings.setDisable(
+                settings_host.getText().equals(mass_conn_settings[0]) &&
                 settings_port.getText().equals(mass_conn_settings[1]) &&
                 settings_db_name.getText().equals(mass_conn_settings[2]) &&
                 settings_login.getText().equals(mass_conn_settings[3]) &&
-                settings_password.getText().equals(mass_conn_settings[4]))
-            btn_save_settings.setDisable(true);
-        else
-            btn_save_settings.setDisable(false);
+                settings_password.getText().equals(mass_conn_settings[4])
+                );
     }
 
     /////////////// Обращается к бд sqlite для получения настроек подключения к бд с паспортами ///////////////
@@ -227,10 +227,8 @@ public class Main_Controller {
             st.close();
             rs.close();
             conn_settings.close();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             _info = "Не найден файл db_settings.db";
-        } catch (ClassNotFoundException e) {
-            // Никогда не произойдет
         }
 
         return mass_conn_settings; // Возвращаем массив с настройками
