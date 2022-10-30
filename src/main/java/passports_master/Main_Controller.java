@@ -16,7 +16,13 @@ public class Main_Controller {
     private URL location;
 
     @FXML
+    private Button btn_Delete;
+
+    @FXML
     private Button btn_Export;
+
+    @FXML
+    private Button btn_Export1;
 
     @FXML
     private Button btn_Import;
@@ -25,7 +31,40 @@ public class Main_Controller {
     private Button btn_save_settings;
 
     @FXML
+    private TextField change_address;
+
+    @FXML
+    private TextField change_amount;
+
+    @FXML
+    private ComboBox<String> change_class;
+
+    @FXML
+    private DatePicker change_date;
+
+    @FXML
+    private TextField change_number;
+
+    @FXML
+    private ChoiceBox<String> change_origin;
+
+    @FXML
+    private TextField change_type;
+
+    @FXML
+    private ComboBox<String> delete_class;
+
+    @FXML
+    private TextField delete_id;
+
+    @FXML
+    private Label delete_info;
+
+    @FXML
     private TextField export_address;
+
+    @FXML
+    private TextField export_amount;
 
     @FXML
     private ComboBox<String> export_class;
@@ -34,22 +73,28 @@ public class Main_Controller {
     private DatePicker export_date;
 
     @FXML
+    private Label export_info;
+
+    @FXML
+    private Label change_info;
+
+    @FXML
     private TextField export_number;
 
     @FXML
-    private TextField export_amount;
+    private ChoiceBox<String> export_origin;
 
     @FXML
     private TextField export_type;
 
     @FXML
+    private TextField import_amount;
+
+    @FXML
     private ComboBox<String> import_class;
 
     @FXML
-    private TextField import_save_path;
-
-    @FXML
-    private TextField import_amount;
+    private Label import_info;
 
     @FXML
     private TextField import_number;
@@ -58,28 +103,25 @@ public class Main_Controller {
     private DatePicker import_old_date;
 
     @FXML
-    private TextField import_type;
-
-    @FXML
     private ChoiceBox<String> import_origin;
 
     @FXML
-    private ChoiceBox<String> export_origin;
+    private TextField import_save_path;
+
+    @FXML
+    private TextField import_type;
 
     @FXML
     private DatePicker import_young_date;
-
-    @FXML
-    private Label export_info;
-
-    @FXML
-    private Label import_info;
 
     @FXML
     private TextField settings_db_name;
 
     @FXML
     private TextField settings_host;
+
+    @FXML
+    private Label settings_info;
 
     @FXML
     private TextField settings_login;
@@ -89,9 +131,6 @@ public class Main_Controller {
 
     @FXML
     private TextField settings_port;
-
-    @FXML
-    private Label settings_info;
 
     private String _info;
 
@@ -108,6 +147,7 @@ public class Main_Controller {
 
         import_class.getItems().addAll(classes); // Добавляем списки
         export_class.getItems().addAll(classes);
+        delete_class.getItems().addAll(classes);
         import_origin.getItems().addAll(Import_origin);
         import_origin.setValue(Import_origin[2]);
         export_origin.getItems().addAll(Export_origin);
@@ -115,6 +155,7 @@ public class Main_Controller {
         btn_Export.setOnAction(event -> cl_export());
         btn_Import.setOnAction(event -> cl_import());
         btn_save_settings.setOnAction(event -> cl_settings());
+        btn_Delete.setOnAction(event -> cl_delete());
 
         String[] mass_conn_settings = ConnectionSettings();
         settings_host.setText(mass_conn_settings[0]);
@@ -183,6 +224,17 @@ public class Main_Controller {
         if(_info.contains("Подключено"))
             settings_change();
     }
+
+    private void cl_delete() {
+        String _class = delete_class.getValue();
+        String _id = delete_id.getText();
+        String[] mass_conn_settings = ConnectionSettings();
+
+        Delete delete = new Delete(_class, _id, mass_conn_settings);
+        _info = delete.Delete_GetInfo();
+        SetDeleteInfo(_info);
+
+    }
     @FXML/////////////// Блокирует поля ввода количества и дат, если поле "номер" заполнено ///////////////
     public void number_auto_disable(){
         if(!import_number.getText().equals("")) {
@@ -238,6 +290,7 @@ public class Main_Controller {
     private void SetExportInfo(String _info){export_info.setText(_info);}
     private void SetImportInfo(String _info){import_info.setText(_info);}
     private void SetSettingsInfo(String _info){settings_info.setText(_info);}
+    private void SetDeleteInfo(String _info){delete_info.setText(_info);}
 
 }
 

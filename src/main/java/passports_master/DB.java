@@ -23,13 +23,10 @@ public class DB {
     ///////////// Устанавливем подключение к бд /////////////
     protected Connection getConn(){
         String str = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(str, LOG, PASS);
-        } catch (SQLException | ClassNotFoundException e) {
-            _info = "Отсутствует подключение к БД";
-        }
+        } catch (SQLException | ClassNotFoundException ignored) { }
         return conn;
     }
 

@@ -38,13 +38,13 @@ public class Export extends DB {
             } catch (IOException e) {
                 _info = "Не удалось закодировать файл";
             }
-            Export_Method(_class, _type, _number, _date, _origin, _amount, _code);
+            ExportMethod(_class, _type, _number, _date, _origin, _amount, _code);
         }
         else
             _info = "Не все поля заполнены корректно"; // Если класс ExportCheckErr() фиксирует ошибку и возвращает false
     }                                                 //                                выводим содеражание проблемы
 
-    private void Export_Method(String _class, String _type, String _number, String _date,
+    private void ExportMethod(String _class, String _type, String _number, String _date,
                                int _origin, int _amount, String _code){
 
         String sql = "INSERT INTO `" + _class + "` (`type` , `number`, `date`, `original`, `amount`, `code`) VALUES(?, ?, ?, ?, ?, ?)";

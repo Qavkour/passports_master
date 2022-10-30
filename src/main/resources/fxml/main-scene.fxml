@@ -223,6 +223,159 @@
                </cursor></AnchorPane>
             </content>
         </Tab>
+      <Tab text="Изменить">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane" stylesheets="@../styles/style.css">
+               <children>
+                  <ImageView fitHeight="126.0" fitWidth="786.0" layoutX="58.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="20.0">
+                     <image>
+                        <Image url="@../styles/passports_master.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="276.0" layoutY="144.0" text="- Класс изделия (Фундамент, Опора и тп)" AnchorPane.leftAnchor="276.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="270.0" layoutY="360.0" text="- Тип изделия" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="change_number" focusTraversable="false" layoutX="15.0" layoutY="432.0" prefHeight="45.0" prefWidth="245.0" promptText="Указывать без №" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="440.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="270.0" layoutY="450.0" text="- Номер № паспорта " AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="21.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="change_date" editable="false" layoutX="15.0" layoutY="526.0" prefHeight="45.0" prefWidth="245.0" promptText="Дата" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="530.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </DatePicker>
+                  <Label layoutX="270.0" layoutY="539.0" text="- Дата выпуска паспорта" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btn_Export1" layoutX="15.0" layoutY="790.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" stylesheets="@../styles/style.css" text="Изменить" textFill="#e8e8e8" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="800.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="change_address" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="15.0" layoutY="227.0" prefHeight="47.0" prefWidth="245.0" promptText="Просто число" style="-fx-border-color: #c74528;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="200.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <ComboBox fx:id="change_class" layoutX="15.0" layoutY="135.0" prefHeight="45.0" prefWidth="245.0" style="-fx-border-color: #c74528;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="135.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <TextField fx:id="change_type" focusTraversable="false" layoutX="15.0" layoutY="389.0" prefHeight="45.0" prefWidth="245.0" promptText="Без пробелов" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="350.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <ChoiceBox fx:id="change_origin" layoutX="25.0" layoutY="671.0" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #ebebeb;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="620.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </ChoiceBox>
+                  <Label layoutX="282.0" layoutY="629.0" text="- Оригинал/копия" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="change_amount" focusTraversable="false" layoutX="15.0" layoutY="701.0" prefHeight="45.0" prefWidth="245.0" promptText="Просто число" AnchorPane.topAnchor="710.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="270.0" layoutY="720.0" text="- Количество изделий" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="change_info" alignment="CENTER" layoutX="260.0" layoutY="806.0" prefHeight="34.0" prefWidth="690.0" styleClass="label-label" textFill="#2c2dc7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="276.0" layoutY="210.0" text="- id паспорта (Число в конце названия файла)">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="192.0" layoutY="286.0" text="Дальше заполняем только то, что надо изменить">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Удалить">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane" stylesheets="@../styles/style.css">
+               <children>
+                  <ImageView fitHeight="126.0" fitWidth="786.0" layoutX="58.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="20.0">
+                     <image>
+                        <Image url="@../styles/passports_master.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="291.0" layoutY="309.0" text="- Класс изделия (Фундамент, Опора и тп)" AnchorPane.leftAnchor="291.0" AnchorPane.topAnchor="309.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btn_Delete" layoutX="15.0" layoutY="538.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" stylesheets="@../styles/style.css" text="Удалить" textFill="#e8e8e8" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="480.0">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="delete_class" layoutX="8.0" layoutY="280.0" prefHeight="45.0" prefWidth="245.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="300.0">
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </ComboBox>
+                  <TextField fx:id="delete_id" focusTraversable="false" layoutX="15.0" layoutY="393.0" prefHeight="45.0" prefWidth="245.0" promptText="Просто число" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="390.0">
+                     <font>
+                        <Font name="Source Code Pro" size="20.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="291.0" layoutY="403.0" text="- id паспорта (Число в конце названия файла)">
+                     <font>
+                        <Font name="Source Code Pro Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="delete_info" alignment="CENTER" layoutX="260.0" layoutY="486.0" prefHeight="34.0" prefWidth="690.0" styleClass="label-label" textFill="#2c2dc7">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </AnchorPane>
+         </content>
+      </Tab>
       <Tab text="Настройки">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane" stylesheets="@../styles/style.css">
