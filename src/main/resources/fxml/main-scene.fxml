@@ -262,7 +262,7 @@
                         <Font name="Source Code Pro Black" size="20.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btn_Export1" layoutX="15.0" layoutY="790.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" stylesheets="@../styles/style.css" text="Изменить" textFill="#e8e8e8" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="800.0">
+                  <Button fx:id="btn_Change" layoutX="15.0" layoutY="790.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" stylesheets="@../styles/style.css" text="Изменить" textFill="#e8e8e8" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="800.0">
                      <font>
                         <Font name="Source Code Pro Black" size="20.0" />
                      </font>
@@ -270,7 +270,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="change_address" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="15.0" layoutY="227.0" prefHeight="47.0" prefWidth="245.0" promptText="Просто число" style="-fx-border-color: #c74528;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="200.0">
+                  <TextField fx:id="change_id" alignment="CENTER_RIGHT" focusTraversable="false" layoutX="15.0" layoutY="227.0" prefHeight="47.0" prefWidth="245.0" promptText="Просто число" style="-fx-border-color: #c74528;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="200.0">
                      <font>
                         <Font name="Source Code Pro" size="20.0" />
                      </font>

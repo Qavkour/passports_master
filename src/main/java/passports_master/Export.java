@@ -83,8 +83,7 @@ public class Export extends DB {
         if(_number.equals("")){NoErr = false;}
         if(_date == null){NoErr = false;}
         if(_origin == null){NoErr = false;}
-        try {
-            if (_number.equals("") & (_amount.equals("") || Integer.parseInt(_amount) < 1)) {NoErr = false;}
+        try {if (_amount.equals("") || Integer.parseInt(_amount) < 1) {NoErr = false;}
         } catch (Exception e){NoErr = false;}
 
         return NoErr; /////////// Если нет пустых полей - возвращаем true ///////////

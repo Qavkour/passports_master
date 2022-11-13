@@ -22,7 +22,7 @@ public class Main_Controller {
     private Button btn_Export;
 
     @FXML
-    private Button btn_Export1;
+    private Button btn_Change;
 
     @FXML
     private Button btn_Import;
@@ -31,7 +31,7 @@ public class Main_Controller {
     private Button btn_save_settings;
 
     @FXML
-    private TextField change_address;
+    private TextField change_id;
 
     @FXML
     private TextField change_amount;
@@ -140,22 +140,27 @@ public class Main_Controller {
             "Подвес", "Стойка", "Хомут", "Узел Крепления", "Фиксатор", "ГРПЗ", "Заземлитель",
             "Изолятор", "ОПН", "Привод", "Разъединитель", "Провод"};
     private String[] Import_origin = {"Оригинал", "Копия", "Не важно"};
-    private String[] Export_origin = {"Оригинал", "Копия"};
+    private String[] Export_and_Change_origin = {"Оригинал", "Копия"};
 
     @FXML
     void initialize() {
 
         import_class.getItems().addAll(classes); // Добавляем списки
         export_class.getItems().addAll(classes);
+        change_class.getItems().addAll(classes);
         delete_class.getItems().addAll(classes);
         import_origin.getItems().addAll(Import_origin);
         import_origin.setValue(Import_origin[2]);
-        export_origin.getItems().addAll(Export_origin);
+        export_origin.getItems().addAll(Export_and_Change_origin);
+        change_origin.getItems().addAll(Export_and_Change_origin);
 
         btn_Export.setOnAction(event -> cl_export());
         btn_Import.setOnAction(event -> cl_import());
-        btn_save_settings.setOnAction(event -> cl_settings());
+        btn_Change.setOnAction(event -> cl_change());
         btn_Delete.setOnAction(event -> cl_delete());
+        btn_save_settings.setOnAction(event -> cl_settings());
+
+
 
         String[] mass_conn_settings = ConnectionSettings();
         settings_host.setText(mass_conn_settings[0]);
@@ -165,6 +170,25 @@ public class Main_Controller {
         settings_password.setText(mass_conn_settings[4]);
 
         btn_save_settings.setDisable(true);
+    }
+
+    private void cl_import(){
+
+        String _class = import_class.getValue();
+        String _type = import_type.getText();
+        String _number = import_number.getText();
+        String _amount = import_amount.getText();
+        String _old_date = String.valueOf(import_old_date.getValue());
+        String _young_date = String.valueOf(import_young_date.getValue());
+        String _origin = import_origin.getValue();
+        String _save_path = import_save_path.getText();
+        String[] mass_conn_settings = ConnectionSettings();
+
+        Import Import = new Import(_class, _type, _number, _amount, _old_date,
+                _young_date, _origin, _save_path, mass_conn_settings);
+        _info = Import.Import_GetInfo();
+
+        SetImportInfo(_info);
     }
 
     private void cl_export(){
@@ -191,25 +215,31 @@ public class Main_Controller {
         }
     }
 
-    private void cl_import(){
-
-        String _class = import_class.getValue();
-        String _type = import_type.getText();
-        String _number = import_number.getText();
-        String _amount = import_amount.getText();
-        String _old_date = String.valueOf(import_old_date.getValue());
-        String _young_date = String.valueOf(import_young_date.getValue());
-        String _origin = import_origin.getValue();
-        String _save_path = import_save_path.getText();
+    private void cl_change(){
+        String _class = change_class.getValue();
+        String _id = change_id.getText();
+        String _type = change_type.getText();
+        String _number = change_number.getText();
+        String _date = String.valueOf(change_date.getValue());
+        String _origin = change_origin.getValue();
+        String _amount = change_amount.getText();
         String[] mass_conn_settings = ConnectionSettings();
 
-        Import Import = new Import(_class, _type, _number, _amount, _old_date,
-                _young_date, _origin, _save_path, mass_conn_settings);
-        _info = Import.Import_GetInfo();
-
-        SetImportInfo(_info);
+        Change change = new Change(_id,  _class, _type, _number, _date, _origin, _amount, mass_conn_settings);
+        _info = change.Change_getInfo();
+        SetChangeInfo(_info);
     }
 
+    private void cl_delete() {
+        String _class = delete_class.getValue();
+        String _id = delete_id.getText();
+        String[] mass_conn_settings = ConnectionSettings();
+
+        Delete delete = new Delete(_class, _id, mass_conn_settings);
+        _info = delete.Delete_GetInfo();
+        SetDeleteInfo(_info);
+
+    }
     private void cl_settings(){
         String _host = settings_host.getText();
         String _port = settings_port.getText();
@@ -225,16 +255,6 @@ public class Main_Controller {
             settings_change();
     }
 
-    private void cl_delete() {
-        String _class = delete_class.getValue();
-        String _id = delete_id.getText();
-        String[] mass_conn_settings = ConnectionSettings();
-
-        Delete delete = new Delete(_class, _id, mass_conn_settings);
-        _info = delete.Delete_GetInfo();
-        SetDeleteInfo(_info);
-
-    }
     @FXML/////////////// Блокирует поля ввода количества и дат, если поле "номер" заполнено ///////////////
     public void number_auto_disable(){
         if(!import_number.getText().equals("")) {
@@ -291,6 +311,7 @@ public class Main_Controller {
     private void SetImportInfo(String _info){import_info.setText(_info);}
     private void SetSettingsInfo(String _info){settings_info.setText(_info);}
     private void SetDeleteInfo(String _info){delete_info.setText(_info);}
+    private void SetChangeInfo(String _info){change_info.setText(_info);}
 
 }
 

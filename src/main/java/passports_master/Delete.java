@@ -1,5 +1,6 @@
 package passports_master;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -21,8 +22,8 @@ public class Delete extends DB{
 
     private void DeleteMethod(String _class, int _id){
         String sql = "DELETE FROM `" + _class + "` WHERE `id` = " + _id + " LIMIT 1";
-        try {
-            Statement st = getConn().createStatement();
+
+        try(Connection conn = getConn(); Statement st = conn.createStatement()) {
             st.executeUpdate(sql);
             _info = "Удалена запись " + _class + "(id: " + _id + ")";
         } catch (SQLException e) {
