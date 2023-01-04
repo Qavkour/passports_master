@@ -35,9 +35,9 @@ public class Import extends DB {
                   String c_youngDate, String c_origin, String c_savePath, String[] mass_conn_settings){
         super(mass_conn_settings); // Передаем настройки бд в класс DB для установки подключения
 
-        if(ImportCheckErr(c_class, c_type, c_number, c_amount, c_oldDate, c_youngDate, c_savePath)){
-            _class = c_class.toLowerCase().replaceAll(" ", ""); //Приводим класс к нижнему регистру и убираем пробелы
-            _type = c_type.toUpperCase().replaceAll("-", "_");  //Приводим тип к верхнему регистру
+        if(ImportCheckErr(c_class, c_type, c_number, c_amount, c_oldDate, c_youngDate, c_savePath)){ // Проверяем наличие некорректно заполненных полей
+            _class = c_class.toLowerCase().replaceAll(" ", ""); // Для стандартизации хранимых данных
+            _type = c_type.toUpperCase().replaceAll("-", "_");  // Для стандартизации хранимых данных
             _number = c_number;
             if(!c_amount.equals(""))_amount = Integer.parseInt(c_amount);
             _oldDate = c_oldDate;
@@ -46,7 +46,7 @@ public class Import extends DB {
             if(!c_origin.equals("Не важно")) _origin = c_origin.equals("Оригинал") ? 1 : 0;
             else _origin = -1;
 
-            /////// Определяем комбнацию ввода и передаем данные в соответствующий 1 из 2 методов ///////
+            /////// Определяем комбинацию ввода(см верхний комментарий) и передаем данные в соответствующий 1 из 2 методов ///////
             if(_number.equals(""))
                 ImportMethod(_class, _type, _amount, _oldDate, _youngDate, _origin);
             else
@@ -54,7 +54,7 @@ public class Import extends DB {
         }
         else
             _info = "Не все поля заполнены корректно"; // Если класс ExportCheckErr() фиксирует ошибку и возвращает false
-    }                                                 //                                выводим содеражание проблемы
+    }                                                 //                                выводим содержание проблемы
 
     ////////////////// Комбинация 1: Номер введен //////////////////
     private void ImportMethod(String _class, String _type, String _number, int _origin){
@@ -129,7 +129,7 @@ public class Import extends DB {
             if (_number.equals("") & (_amount.equals("") || Integer.parseInt(_amount) < 1)) {NoErr = false;}
         } catch (Exception e){NoErr = false;}
 
-        return NoErr; /////////// Если нет пустых полей - возвращаем true ///////////
+        return NoErr; // Если нет некорректно заполненных полей - возвращаем true
     }
 
     ////////////// Передает информацию  в контроллер //////////////

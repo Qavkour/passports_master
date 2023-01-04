@@ -23,18 +23,18 @@ public class Export extends DB {
                   String c_date, String c_origin, String c_amount, String[] mass_conn_settings){
         super(mass_conn_settings); // Передаем настройки бд в класс DB для установки подключения
 
-        if(ExportCheckErr(c_address, c_class, c_type, c_number, c_date, c_origin, c_amount)) {
+        if(ExportCheckErr(c_address, c_class, c_type, c_number, c_date, c_origin, c_amount)) { // Проверяем наличие некорректно заполненных полей
 
             _address = c_address;
-            _class = c_class.toLowerCase().replaceAll(" ", ""); //Приводим класс к нижнему регистру и убираем пробелы
-            _type = c_type.toUpperCase().replaceAll("-", "_");  //Приводим тип к верхнему регистру
+            _class = c_class.toLowerCase().replaceAll(" ", ""); // Для стандартизации хранимых данных
+            _type = c_type.toUpperCase().replaceAll("-", "_");  // Для стандартизации хранимых данных
             _number = c_number;
             _date = c_date;
             _origin = c_origin.equals("Оригинал") ? 1 : 0;
             _amount = Integer.parseInt(c_amount);
 
             try {
-                _code = encodeImage(_address); // Присваиваем переменной _code код файла
+                _code = encodeImage(_address); // Присваиваем переменной _code код(Base64) файла
             } catch (IOException e) {
                 _info = "Не удалось закодировать файл";
             }
@@ -86,8 +86,9 @@ public class Export extends DB {
         try {if (_amount.equals("") || Integer.parseInt(_amount) < 1) {NoErr = false;}
         } catch (Exception e){NoErr = false;}
 
-        return NoErr; /////////// Если нет пустых полей - возвращаем true ///////////
+        return NoErr; // Если нет некорректно заполненных полей - возвращаем true
     }
 
-    public String Export_GetInfo(){return _info;} //////// Передача информации в контроллер ////////
+    //////// Передача информации в контроллер ////////
+    public String Export_GetInfo(){return _info;}
 }

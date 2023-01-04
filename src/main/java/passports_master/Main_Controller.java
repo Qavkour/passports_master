@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.*;
+
 public class Main_Controller {
 
     @FXML
@@ -134,7 +135,7 @@ public class Main_Controller {
 
     private String _info;
 
-    /////////////// Список
+    /////////////// Список ///////////////
     private String[] classes = {"Опора", "Фундамент", "Анкер", "Деталь", "ЖП", "Лестница", "Оголовок", "Столик",
             "Груз ЖБ", "Рама Опорная", "Люлька", "Знак", "КБП", "Кронштейн", "Консоль", "Оттяжка",
             "Подвес", "Стойка", "Хомут", "Узел Крепления", "Фиксатор", "ГРПЗ", "Заземлитель",
@@ -145,7 +146,8 @@ public class Main_Controller {
     @FXML
     void initialize() {
 
-        import_class.getItems().addAll(classes); // Добавляем списки
+        ////////////// Добавляем списки //////////////
+        import_class.getItems().addAll(classes);
         export_class.getItems().addAll(classes);
         change_class.getItems().addAll(classes);
         delete_class.getItems().addAll(classes);
@@ -161,10 +163,9 @@ public class Main_Controller {
         btn_save_settings.setOnAction(event -> cl_settings());
 
 
-
-        String[] mass_conn_settings = ConnectionSettings();
-        settings_host.setText(mass_conn_settings[0]);
-        settings_port.setText(mass_conn_settings[1]);
+        String[] mass_conn_settings = ConnectionSettings(); // Получаем параметры для подключения
+        settings_host.setText(mass_conn_settings[0]);       // к удаленной бд с паспортами из локальной бд
+        settings_port.setText(mass_conn_settings[1]);       // и выводим их
         settings_db_name.setText(mass_conn_settings[2]);
         settings_login.setText(mass_conn_settings[3]);
         settings_password.setText(mass_conn_settings[4]);
@@ -172,28 +173,28 @@ public class Main_Controller {
         btn_save_settings.setDisable(true);
     }
 
-    private void cl_import(){
+    private void cl_import() { // Считывает информация с экрана со вкладки Импорт
 
-        String _class = import_class.getValue();
-        String _type = import_type.getText();
-        String _number = import_number.getText();
-        String _amount = import_amount.getText();
-        String _old_date = String.valueOf(import_old_date.getValue());
-        String _young_date = String.valueOf(import_young_date.getValue());
-        String _origin = import_origin.getValue();
-        String _save_path = import_save_path.getText();
-        String[] mass_conn_settings = ConnectionSettings();
+        String _class = import_class.getValue();  // Паспорта делятся на классы (Опора, фундамент и тп)
+        String _type = import_type.getText();     // Классы делятся на типы (Фундамент может быть как ТСА-4,5-5, так и ТСА-5,0-5)
+        String _number = import_number.getText(); // У каждого паспорта есть свой номер
+        String _amount = import_amount.getText(); // У каждого паспорта есть количество изделий, на которое распространяется паспорт
+        String _old_date = String.valueOf(import_old_date.getValue()); // Пользователь вводит дату самого старого из нужных паспортов
+        String _young_date = String.valueOf(import_young_date.getValue()); // Пользователь вводит дату самого нового из нужных паспортов
+        String _origin = import_origin.getValue(); // Ищем оригиналы, копии, или же неважно
+        String _save_path = import_save_path.getText(); // Пользователь указывает конечную директорию, куда надо сохранить паспорта
+        String[] mass_conn_settings = ConnectionSettings(); // Получаем параметры для подключения к удаленной бд с паспортами из локальной бд
 
         Import Import = new Import(_class, _type, _number, _amount, _old_date,
                 _young_date, _origin, _save_path, mass_conn_settings);
-        _info = Import.Import_GetInfo();
+        _info = Import.Import_GetInfo(); // Получаем информацию об ошибках или же об успехе из класса Import
 
-        SetImportInfo(_info);
+        SetImportInfo(_info); // Выводим информацию на экран
     }
 
-    private void cl_export(){
+    private void cl_export() { // Считывает информация с экрана со вкладки Экспорт
 
-        String _address = export_address.getText();
+        String _address = export_address.getText(); // Получаем адрес паспорта, которого нужно экспортировать в бд
         String _class = export_class.getValue();
         String _type = export_type.getText();
         String _number = export_number.getText();
@@ -206,7 +207,7 @@ public class Main_Controller {
         _info = Export.Export_GetInfo();
         SetExportInfo(_info);
 
-        if(_info.contains("Добавлена")) {
+        if (_info.contains("Добавлена")) { // Если экспорт завершился успехом, для удобства очищаем частоменяемые поля
             export_address.setText("");
             export_type.clear();
             export_number.clear();
@@ -215,9 +216,9 @@ public class Main_Controller {
         }
     }
 
-    private void cl_change(){
+    private void cl_change() { // Считывает информация с экрана со вкладки Изменить
         String _class = change_class.getValue();
-        String _id = change_id.getText();
+        String _id = change_id.getText(); // В бд у каждого паспорта есть свой уникальный идентификатор в переделах таблицы
         String _type = change_type.getText();
         String _number = change_number.getText();
         String _date = String.valueOf(change_date.getValue());
@@ -225,12 +226,12 @@ public class Main_Controller {
         String _amount = change_amount.getText();
         String[] mass_conn_settings = ConnectionSettings();
 
-        Change change = new Change(_id,  _class, _type, _number, _date, _origin, _amount, mass_conn_settings);
+        Change change = new Change(_id, _class, _type, _number, _date, _origin, _amount, mass_conn_settings);
         _info = change.Change_getInfo();
         SetChangeInfo(_info);
     }
 
-    private void cl_delete() {
+    private void cl_delete() { // Считывает информация с экрана со вкладки Удалить
         String _class = delete_class.getValue();
         String _id = delete_id.getText();
         String[] mass_conn_settings = ConnectionSettings();
@@ -240,29 +241,29 @@ public class Main_Controller {
         SetDeleteInfo(_info);
 
     }
-    private void cl_settings(){
-        String _host = settings_host.getText();
-        String _port = settings_port.getText();
-        String _db_name = settings_db_name.getText();
-        String _login = settings_login.getText();
-        String _password = settings_password.getText();
+
+    private void cl_settings() { // Считывает информация с экрана со вкладки Настройки(параметры для подключения к бд)
+        String _host = settings_host.getText(); // Хост
+        String _port = settings_port.getText(); // Порт
+        String _db_name = settings_db_name.getText(); // Имя бд
+        String _login = settings_login.getText(); // Логин
+        String _password = settings_password.getText(); // Пароль
 
         Settings settings = new Settings(_host, _port, _db_name, _login, _password);
         _info = settings.Settings_getInfo();
         SetSettingsInfo(_info);
 
-        if(_info.contains("Подключено"))
+        if (_info.contains("Подключено")) // Если по новым данным удалось подключиться к бд, изменяем настройки на актуальные
             settings_change();
     }
 
     @FXML/////////////// Блокирует поля ввода количества и дат, если поле "номер" заполнено ///////////////
-    public void number_auto_disable(){
-        if(!import_number.getText().equals("")) {
+    public void number_auto_disable() {                                 // см верхние комментарии в классе Import
+        if (!import_number.getText().equals("")) {
             import_amount.setDisable(true);
             import_old_date.setDisable(true);
             import_young_date.setDisable(true);
-        }
-        else {
+        } else {
             import_amount.setDisable(false);
             import_old_date.setDisable(false);
             import_young_date.setDisable(false);
@@ -270,19 +271,19 @@ public class Main_Controller {
     }
 
     @FXML
-    public void settings_change(){
+    public void settings_change() { // Сохраняет актуальные параметры для подключения к удаленной бд в локальной бд
         String[] mass_conn_settings = ConnectionSettings();
         btn_save_settings.setDisable(
                 settings_host.getText().equals(mass_conn_settings[0]) &&
-                settings_port.getText().equals(mass_conn_settings[1]) &&
-                settings_db_name.getText().equals(mass_conn_settings[2]) &&
-                settings_login.getText().equals(mass_conn_settings[3]) &&
-                settings_password.getText().equals(mass_conn_settings[4])
-                );
+                        settings_port.getText().equals(mass_conn_settings[1]) &&
+                        settings_db_name.getText().equals(mass_conn_settings[2]) &&
+                        settings_login.getText().equals(mass_conn_settings[3]) &&
+                        settings_password.getText().equals(mass_conn_settings[4])
+        );
     }
 
     /////////////// Обращается к бд sqlite для получения настроек подключения к бд с паспортами ///////////////
-    private String[] ConnectionSettings(){
+    private String[] ConnectionSettings() {
         String[] mass_conn_settings = new String[5];
         try {
             Class.forName("org.sqlite.JDBC");
@@ -307,11 +308,25 @@ public class Main_Controller {
     }
 
     /////////////////// Выводим информация на экран ///////////////////
-    private void SetExportInfo(String _info){export_info.setText(_info);}
-    private void SetImportInfo(String _info){import_info.setText(_info);}
-    private void SetSettingsInfo(String _info){settings_info.setText(_info);}
-    private void SetDeleteInfo(String _info){delete_info.setText(_info);}
-    private void SetChangeInfo(String _info){change_info.setText(_info);}
+    private void SetExportInfo(String _info) {
+        export_info.setText(_info);
+    }
+
+    private void SetImportInfo(String _info) {
+        import_info.setText(_info);
+    }
+
+    private void SetSettingsInfo(String _info) {
+        settings_info.setText(_info);
+    }
+
+    private void SetDeleteInfo(String _info) {
+        delete_info.setText(_info);
+    }
+
+    private void SetChangeInfo(String _info) {
+        change_info.setText(_info);
+    }
 
 }
 

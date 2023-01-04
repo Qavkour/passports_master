@@ -12,7 +12,7 @@ public class DB {
     protected String _info;
 
     ///////// Принимаем настройки от классов наследников или от класса Settings /////////
-    public DB(String mass_conn_settings[]){
+    public DB(String mass_conn_settings[]) {
         HOST = mass_conn_settings[0];
         PORT = mass_conn_settings[1];
         DB_NAME = mass_conn_settings[2];
@@ -20,19 +20,20 @@ public class DB {
         PASS = mass_conn_settings[4];
     }
 
-    ///////////// Устанавливем подключение к бд /////////////
-    protected Connection getConn(){
+    ///////////// Устанавливаем подключение к бд /////////////
+    protected Connection getConn() {
         String str = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DB_NAME;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(str, LOG, PASS);
-        } catch (SQLException | ClassNotFoundException ignored) { }
+        } catch (SQLException | ClassNotFoundException ignored) {
+        }
         return conn;
     }
 
     ///////// Если удалось подключиться к бд за 10 мс, то возвращаем true /////////
     public boolean isConnection() {
-        try(Connection conn = getConn()){
+        try (Connection conn = getConn()) {
             conn.isValid(10);
             return true;
         } catch (SQLException | NullPointerException e) {
