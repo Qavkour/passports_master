@@ -1,12 +1,11 @@
 package passports_master;
 
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.sql.*;
 
 public class Main_Controller {
 
@@ -271,7 +270,7 @@ public class Main_Controller {
     }
 
     @FXML
-    public void settings_change() { // Сохраняет актуальные параметры для подключения к удаленной бд в локальной бд
+    public void settings_change() {
         String[] mass_conn_settings = ConnectionSettings();
         btn_save_settings.setDisable(
                 settings_host.getText().equals(mass_conn_settings[0]) &&
@@ -282,27 +281,14 @@ public class Main_Controller {
         );
     }
 
-    /////////////// Обращается к бд sqlite для получения настроек подключения к бд с паспортами ///////////////
+    /////////////// Обращаемся к сериализированному массиву для получения настроек подключения к бд с паспортами ///////////////
     private String[] ConnectionSettings() {
         String[] mass_conn_settings = new String[5];
         try {
-            Class.forName("org.sqlite.JDBC");
-            Connection conn_settings = DriverManager.getConnection("jdbc:" +
-                    "sqlite:" + getClass().getResource("/META-INF/db_settings.db"));
-            String sql = "SELECT * FROM `settings`";
-            Statement st = conn_settings.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            mass_conn_settings[0] = rs.getString("host");
-            mass_conn_settings[1] = rs.getString("port");
-            mass_conn_settings[2] = rs.getString("db_name");
-            mass_conn_settings[3] = rs.getString("login");
-            mass_conn_settings[4] = rs.getString("password");
-            st.close();
-            rs.close();
-            conn_settings.close();
-        } catch (SQLException | ClassNotFoundException e) {
-            _info = "Не найден файл db_settings.db";
-        }
+            FileInputStream fis = new FileInputStream("src/main/resources/META-INF/db_settings.bin");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            mass_conn_settings = (String []) ois.readObject();
+        } catch(IOException | ClassNotFoundException ignored){}
 
         return mass_conn_settings; // Возвращаем массив с настройками
     }

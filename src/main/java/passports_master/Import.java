@@ -1,5 +1,5 @@
 /**
- * Метод ImportMethod перегружен 2 раза , что соответствует 2 комбинация ввода параметров:
+ * Метод ImportMethod перегружен 2 раза, что соответствует 2 комбинация ввода параметров:
  *  1) Номер введен
  *  2) Номер не введен
  *
@@ -61,7 +61,7 @@ public class Import extends DB {
         String sql = "SELECT `code`, `id` FROM " + _class + " WHERE `type` LIKE ? AND `number` = ?";
         if(_origin != -1) sql += " AND `original` = " + _origin; // определяем, нужно ли искать строго оригиналы(копии), или не важно
 
-        try(Connection conn = getConn(); PreparedStatement ps = conn.prepareStatement(sql);){
+        try(Connection conn = getConn(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, _type);
             ps.setString(2, _number);
             ResultSet res = ps.executeQuery();

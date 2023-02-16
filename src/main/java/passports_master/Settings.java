@@ -1,9 +1,11 @@
 package passports_master;
 
-import java.sql.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 
-public class Settings {
+public class Settings{
     private String _info;
     public Settings(String c_host, String c_port, String c_db_name,
                     String c_login, String c_password){
@@ -19,22 +21,12 @@ public class Settings {
 
         if(database.isConnection()){ // Если по текущим настройкам удалось подключиться к бд
             try {                    //                           за 10 мс, то сохраняем их
-                Class.forName("org.sqlite.JDBC");
-                Connection conn_settings = DriverManager.getConnection("jdbc:" +
-                        "sqlite:" + getClass().getResource("/META-INF/db_settings.db"));
-
-                String sql = "UPDATE `settings` SET `host` = ?, `port` = ?, `db_name` = ?, `login` = ?, `password` = ?";
-                PreparedStatement ps = conn_settings.prepareStatement(sql);
-                ps.setString(1, c_host);
-                ps.setString(2, c_port);
-                ps.setString(3, c_db_name);
-                ps.setString(4, c_login);
-                ps.setString(5, c_password);
-                ps.executeUpdate();
-                conn_settings.close();
-
+                    FileOutputStream fis = new FileOutputStream("src/main/resources/META-INF/db_settings.bin");
+                    ObjectOutputStream oos = new ObjectOutputStream(fis);
+                    oos.writeObject(mass_conn_settings);
+                    oos.close();
                 _info = "Подключено и сохранено";
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (IOException e) {
                 _info = "Не удалось сохранить настройки";
             }
         }
